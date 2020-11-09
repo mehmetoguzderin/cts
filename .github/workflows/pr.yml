@@ -12,11 +12,31 @@ jobs:
     - uses: actions/setup-node@v2-beta
       with:
         node-version: '15.x'
+    - run: npm ci
     - run: |
-        npm ci
         npm test
         sed -i '/out\//d' .gitignore
         sed -i '/out-wpt\//d' .gitignore
+    - run: |
+        cat << EOF >> firebase.json
+        {
+          "hosting": {
+            "public": ".",
+            "ignore": [
+              "firebase.json",
+              "**/.*",
+              "**/node_modules/**"
+            ]
+          }
+        }
+        EOF
+        cat << EOF >> .firebaserc
+        {
+          "projects": {
+            "default": "gpuweb-prs"
+          }
+        }
+        EOF
     - id: deployment
       uses: FirebaseExtended/action-hosting-deploy@v0
       with:
