@@ -17,7 +17,7 @@ jobs:
     - name: Use Node.js
       uses: actions/setup-node@v2-beta
       with:
-        node-version: latest
+        node-version: '14.x'
     - run: |
         cat << EOF
         ${{ toJSON(github) }}
