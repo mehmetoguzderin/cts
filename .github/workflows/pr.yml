@@ -9,7 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - run: git checkout ${{ github.event.pull_request.head.sha }}
+    - run: |
+        git fetch
+        git checkout ${{ github.event.pull_request.head.sha }}
     - uses: actions/setup-node@v2-beta
       with:
         node-version: '15.x'
