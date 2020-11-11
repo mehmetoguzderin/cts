@@ -101,6 +101,7 @@ export const kBufferUsages = numericKeysOf(kBufferUsageInfo);
 
 
 
+
 export const kRegularTextureFormatInfo =
 
 
@@ -138,7 +139,8 @@ export const kRegularTextureFormatInfo =
   'bgra8unorm-srgb': { renderable: true, color: true, depth: false, stencil: false, storage: false, copySrc: true, copyDst: true, bytesPerBlock: 4, blockWidth: 1, blockHeight: 1 },
   // Packed 32-bit formats
   'rgb10a2unorm': { renderable: true, color: true, depth: false, stencil: false, storage: false, copySrc: true, copyDst: true, bytesPerBlock: 4, blockWidth: 1, blockHeight: 1 },
-  'rg11b10float': { renderable: false, color: true, depth: false, stencil: false, storage: false, copySrc: true, copyDst: true, bytesPerBlock: 4, blockWidth: 1, blockHeight: 1 },
+  'rg11b10ufloat': { renderable: false, color: true, depth: false, stencil: false, storage: false, copySrc: true, copyDst: true, bytesPerBlock: 4, blockWidth: 1, blockHeight: 1 },
+  'rgb9e5ufloat': { renderable: false, color: true, depth: false, stencil: false, storage: false, copySrc: true, copyDst: true, bytesPerBlock: 4, blockWidth: 1, blockHeight: 1 },
   // 64-bit formats
   'rg32uint': { renderable: true, color: true, depth: false, stencil: false, storage: true, copySrc: true, copyDst: true, bytesPerBlock: 8, blockWidth: 1, blockHeight: 1 },
   'rg32sint': { renderable: true, color: true, depth: false, stencil: false, storage: true, copySrc: true, copyDst: true, bytesPerBlock: 8, blockWidth: 1, blockHeight: 1 },
@@ -199,7 +201,7 @@ export const kCompressedTextureFormatInfo =
   'bc5-rg-unorm': { renderable: false, color: true, depth: false, stencil: false, storage: false, copySrc: true, copyDst: true, bytesPerBlock: 16, blockWidth: 4, blockHeight: 4, extension: 'texture-compression-bc' },
   'bc5-rg-snorm': { renderable: false, color: true, depth: false, stencil: false, storage: false, copySrc: true, copyDst: true, bytesPerBlock: 16, blockWidth: 4, blockHeight: 4, extension: 'texture-compression-bc' },
   'bc6h-rgb-ufloat': { renderable: false, color: true, depth: false, stencil: false, storage: false, copySrc: true, copyDst: true, bytesPerBlock: 16, blockWidth: 4, blockHeight: 4, extension: 'texture-compression-bc' },
-  'bc6h-rgb-sfloat': { renderable: false, color: true, depth: false, stencil: false, storage: false, copySrc: true, copyDst: true, bytesPerBlock: 16, blockWidth: 4, blockHeight: 4, extension: 'texture-compression-bc' },
+  'bc6h-rgb-float': { renderable: false, color: true, depth: false, stencil: false, storage: false, copySrc: true, copyDst: true, bytesPerBlock: 16, blockWidth: 4, blockHeight: 4, extension: 'texture-compression-bc' },
   'bc7-rgba-unorm': { renderable: false, color: true, depth: false, stencil: false, storage: false, copySrc: true, copyDst: true, bytesPerBlock: 16, blockWidth: 4, blockHeight: 4, extension: 'texture-compression-bc' },
   'bc7-rgba-unorm-srgb': { renderable: false, color: true, depth: false, stencil: false, storage: false, copySrc: true, copyDst: true, bytesPerBlock: 16, blockWidth: 4, blockHeight: 4, extension: 'texture-compression-bc' } };
 
@@ -290,7 +292,8 @@ export const kTextureComponentTypeInfo =
 {
   'float': {},
   'sint': {},
-  'uint': {} };
+  'uint': {},
+  'depth-comparison': {} };
 
 export const kTextureComponentTypes = keysOf(kTextureComponentTypeInfo);
 
@@ -312,6 +315,7 @@ export const kTextureViewDimensionInfo =
 export const kTextureViewDimensions = keysOf(kTextureViewDimensionInfo);
 
 // Typedefs for bindings
+
 
 
 
@@ -439,6 +443,7 @@ export const kTextureBindingTypeInfo =
 
 {
   'sampled-texture': { usage: GPUConst.TextureUsage.SAMPLED, ...kBindingKind.sampledTex, ...kValidStagesAll },
+  'multisampled-texture': { usage: GPUConst.TextureUsage.SAMPLED, ...kBindingKind.sampledTex, ...kValidStagesAll },
   'writeonly-storage-texture': { usage: GPUConst.TextureUsage.STORAGE, ...kBindingKind.storageTex, ...kValidStagesStorageWrite },
   'readonly-storage-texture': { usage: GPUConst.TextureUsage.STORAGE, ...kBindingKind.storageTex, ...kValidStagesAll } };
 
