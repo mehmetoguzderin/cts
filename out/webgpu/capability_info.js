@@ -14,6 +14,8 @@ function numericKeysOf(obj) {
 
 // Buffers
 
+export const kBufferSizeAlignment = 4;
+
 export const kBufferUsageInfo =
 
 {
@@ -31,6 +33,8 @@ export const kBufferUsageInfo =
 export const kBufferUsages = numericKeysOf(kBufferUsageInfo);
 
 // Textures
+
+
 
 
 
