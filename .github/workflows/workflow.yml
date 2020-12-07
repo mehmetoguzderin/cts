@@ -18,7 +18,6 @@ jobs:
           PR=$(curl https://api.github.com/search/issues?q=${{ github.event.workflow_run.head_sha }} |
           grep -Po "(?<=${{ github.event.workflow_run.repository.full_name }}\/pulls\/)\d*" | head -1)
           echo "PR=$PR" >> $GITHUB_ENV
-      - run: rm -rf *
       - uses: actions/github-script@v3
         id: pr-artifact
         with:
@@ -38,7 +37,7 @@ jobs:
       - run: |
           curl -L -o "pr-artifact.zip" "${{ steps.pr-artifact.outputs.result }}"
           ls -a
-          unzip pr-artifact.zip
+          unzip -o pr-artifact.zip
           ls -a
       - run: |
           cat << EOF >> firebase.json
