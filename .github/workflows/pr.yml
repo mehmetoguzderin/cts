@@ -21,3 +21,7 @@ jobs:
           node-version: "15.x"
       - run: npm ci
       - run: npm test
+      - uses: actions/upload-artifact@v2
+        with:
+          name: pr-artifact
+          path: ./
