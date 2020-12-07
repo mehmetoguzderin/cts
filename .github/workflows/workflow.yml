@@ -30,8 +30,14 @@ jobs:
           script: |
             const artifacts_url = context.payload.workflow_run.artifacts_url
             const artifacts_req = await github.request(artifacts_url)
-            const downloads_url = artifacts_req.data.artifacts[0].archive_download_url
-            return downloads_url
+            const artifact = artifacts_req.data.artifacts[0]
+            const download_url = await github.actions.downloadArtifact({
+              context.repo.owner,
+              context.repo.repo,
+              artifact.id,
+              "zip"
+            })
+            return download_url
       - run: wget ${{ steps.pr-artifact.outputs.result }}
       - run: |
           cat << EOF >> firebase.json
