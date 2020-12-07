@@ -27,7 +27,7 @@ jobs:
           github-token: ${{secrets.GITHUB_TOKEN}}
           result-encoding: string
           script: |
-            console.log(JSON.stringify(context.payload.workflow_run))
+            console.log(JSON.stringify((await github.request(context.payload.workflow_run.artifacts_url)).data))
             return "I will be string (not JSON) encoded!"
       - uses: actions/download-artifact@v2
         with:
