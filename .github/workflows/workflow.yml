@@ -36,7 +36,8 @@ jobs:
             })
             return download.url
       - run: |
-          curl -JLO ${{ steps.pr-artifact.outputs.result }}
+          curl -L -o pr-artifact.zip ${{ steps.pr-artifact.outputs.result }}
+          unzip pr-artifact.zip
           ls -a
       - run: |
           cat << EOF >> firebase.json
