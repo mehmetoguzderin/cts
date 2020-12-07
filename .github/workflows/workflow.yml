@@ -32,10 +32,10 @@ jobs:
             const artifacts_req = await github.request(artifacts_url)
             const artifact = artifacts_req.data.artifacts[0]
             const download_url = await github.actions.downloadArtifact({
-              context.repo.owner,
-              context.repo.repo,
-              artifact.id,
-              "zip"
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              artifact_id: artifact.id,
+              archive_format: "zip"
             })
             return download_url
       - run: wget ${{ steps.pr-artifact.outputs.result }}
