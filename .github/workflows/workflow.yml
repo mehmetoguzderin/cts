@@ -37,6 +37,7 @@ jobs:
               artifact_id: artifact.id,
               archive_format: "zip"
             })
+            console.log(JSON.stringify(download_url))
             return download_url
       - run: wget ${{ steps.pr-artifact.outputs.result }}
       - run: |
