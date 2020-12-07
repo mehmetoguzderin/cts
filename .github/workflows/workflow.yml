@@ -23,6 +23,7 @@ jobs:
           ${{ toJSON(github) }}
           EOF
       - uses: actions/github-script@v3
+        id: pr-artifact
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           result-encoding: string
@@ -30,11 +31,8 @@ jobs:
             const artifacts_url = context.payload.workflow_run.artifacts_url
             const artifacts_req = await github.request(artifacts_url)
             const downloads_url = artifacts_req.data.artifacts[0].archive_download_url
-            console.log(downloads_url)
-            return "I will be string (not JSON) encoded!"
-      - uses: actions/download-artifact@v2
-        with:
-          name: pr-artifact
+            return downloads_url
+      - run: wget ${{ steps.pr-artifact.outputs.result }}
       - run: |
           cat << EOF >> firebase.json
           {
